@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="default" namespace="/" extends="struts-default">
+
+
+		<!-- interceptor for Admin & Member -->
+		<interceptors>
+			<interceptor name="logInInterceptor" class="org.mz.action.LoginInterceptor" />
+			<interceptor-stack name="logInStack">
+				<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="logInInterceptor" />
+			</interceptor-stack>
+		</interceptors>
+
+		<global-results>
+			<result name="login">/home.jsp</result>
+		</global-results>
+
+
+		<action name="login" class="org.mz.action.LoginAction" method="execute">
+			<result name="success" type="redirect">/abc.action</result>
+			<result name="profile" type="redirect">/abcd.action</result>
+			<result name="error">/home.jsp</result>
+			</action>
+			
+
+		<action name="abc" class="org.mz.action.LoginAction" method="check">
+			<interceptor-ref name="logInStack"></interceptor-ref>
+			<result name="success">/kittyParty.jsp</result>
+		</action>
+
+		<action name="abcd" class="org.mz.action.LoginAction" method="checkUser">
+			<interceptor-ref name="logInStack"></interceptor-ref>
+			<result name="profile">/profile.jsp</result>
+		</action>
+		
+		<action name="login1" class="org.mz.action.DrawnKittyAction" method="execute">
+			<result name="drawn" type="redirect">/abcde.action</result>
+			<result name="error">/home.jsp</result>
+			</action>
+			
+		<action name="abcde" class="org.mz.action.DrawnKittyAction" method="check1">
+			<interceptor-ref name="logInStack"></interceptor-ref>
+			<result name="success">/drawKitty.jsp</result>
+		</action>
+		
+	
+		<!-- INTERCEPTOR END -->
+		
+		
+		<!-- LOGOUT ACTION -->
+		<action name="logout" class="org.mz.action.LoginAction" method="logOut">
+			<result name="success">/home.jsp</result>
+		</action>
+		<!-- LOGOUT ACTION FINISHED -->
+
+
+		<!-- KITTYPARTY DETAILS ADD TO DATABASE ACTION -->
+		<action name="kittyParty" class="org.mz.action.KittyPartyAction">
+			<result name="success">/addFriend.jsp</result>
+		</action>
+		<!-- KITTYPARTY DETAILS ADD TO DATABASE ACTION END -->
+
+
+		<!-- SIGNUP ACTION -->
+		<action name="signup" class="org.mz.action.KittyAction">
+			<result name="success">/home.jsp</result>
+		</action>
+		<!-- SIGNUP ACTION END -->
+
+
+		<!-- ADD FRIENDS TO DATABASE -->
+		<action name="addfriend" class="org.mz.action.AddFriendAction">
+			<result name="success">/addFriend.jsp</result>
+			<result name="fail">/addFriend.jsp</result>
+		</action>
+		<!-- ADD FRIENDS TO DATABASE END -->
+
+
+		<!-- GENERATE INVITATIONS -->
+		<action name="generate" class="org.mz.action.GenerateAction">
+			<result name="success">/invitations.jsp</result>
+			<result name="fail">/invitaions.jsp</result>
+		</action>
+		<!-- GENERATE INVITATIONS END -->
+
+
+		<!-- SEND EMAIL ACTION -->
+		<action name="send" class="org.mz.action.SendAction">
+		<result name="success">/invitations.jsp</result>
+		</action>
+		<!-- SEND ACTION END -->
+
+
+		<!-- ON EMAIL LINK CLICK ACTION -->
+		<action name="invi" class="org.mz.action.InvitationInfoAction">
+			<result name="success">/emailLink.jsp</result>
+		</action>
+		<!-- ON EMAIL CLICK ACTION END -->
+
+
+		<!--VIEW ADD FRIENDS -->
+		<action name="view" class="org.mz.action.ViewAction" method="execute">
+			<result name="success">/view.jsp</result>
+		</action>
+		<!-- VIEW ADD FRIENDS END -->
+		
+			<!--VIEW KITTIES OF USER PROFILE -->
+		<action name="viewKitties" class="org.mz.action.ViewKitties">
+			<result name="success">/viewKitty.jsp</result>
+		</action>
+
+		<!-- VIEW KITTIES OF USER PROFILE END -->
+
+
+			<!--DELETE -->
+		<action name="delete" class="org.mz.action.DeleteAction">
+			<result name="success">/view.jsp</result>
+			
+		</action>
+		<!-- DELETE END -->
+		
+		<action name="SaveChanges" class="org.mz.action.SaveChangesAction">
+			<result name="success">/profile.jsp</result>
+		
+		</action>
+		
+		
+		
+		<!-- generate Kitty prize -->
+		
+		 <action name="generatePrize" class="org.mz.action.KittyPrizeAction">
+		 <result name="success">/drawKitty.jsp</result>
+		</action>
+		
+		<!-- generate Kitty prizeEND -->
+		
+		<!-- forget Password -->
+		<action name="forgetPassword" class="org.mz.action.ForgetPasswordAction">
+		 <result name="success">/home.jsp</result>
+		</action>
+		
+		<!-- forget Password END -->
+					
+	</package>
+
+</struts>
